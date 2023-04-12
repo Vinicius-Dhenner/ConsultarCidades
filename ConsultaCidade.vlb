@@ -1,0 +1,13 @@
+﻿[cbbConsultCity]
+Coordinates=245,10,101,124
+
+[lblTitulo]
+Coordinates=554,10,60,58
+
+[cbbConsultState]
+Coordinates=126,10,109,124
+
+[]
+Coordinates=253,342,197,36
+Visible=True
+

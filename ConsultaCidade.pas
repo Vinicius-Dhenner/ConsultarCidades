@@ -1,27 +1,44 @@
-unit ConsultaCidade;
+  unit ConsultaCidade;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, System.JSON;
 
 type
   TFormHome = class(TForm)
     cbbConsultState: TComboBox;
     cbbConsultCity: TComboBox;
     lblTitulo: TLabel;
+    procedure acessarAPI();
   private
     { Private declarations }
   public
     { Public declarations }
-  end;
 
+  end;
 var
   FormHome: TFormHome;
 
 implementation
 
 {$R *.dfm}
+
+procedure TFormHome.acessarAPI();
+var
+  jsonObject : TJSONObject;
+begin
+  try
+    jsonObject := TJSONObject.Create; { INSTANCIANDO O OBJECTO JSON }
+  finally
+    jsonObject.DisposeOf; { DESTRUINDO O OBJETO }
+  end;
+end;
+
+{ TFormHome }
+
+
+
 
 end.

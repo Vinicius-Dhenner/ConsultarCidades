@@ -2,13 +2,13 @@ program Project;
 
 uses
   Vcl.Forms,
-  ConsultaCidade in 'ConsultaCidade.pas' {Form1};
+  ConsultaCidade in 'ConsultaCidade.pas' {FormHome};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TFormHome, FormHome);
   Application.Run;
 end.

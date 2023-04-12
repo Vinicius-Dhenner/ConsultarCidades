@@ -2,8 +2,8 @@ object FormHome: TFormHome
   Left = 0
   Top = 0
   Caption = 'CONSULTAR CIDADES'
-  ClientHeight = 299
-  ClientWidth = 635
+  ClientHeight = 277
+  ClientWidth = 634
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -27,7 +27,7 @@ object FormHome: TFormHome
     ParentFont = False
   end
   object cbbConsultState: TComboBox
-    Left = 48
+    Left = 56
     Top = 120
     Width = 233
     Height = 26
