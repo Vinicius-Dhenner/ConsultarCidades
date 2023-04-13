@@ -11,9 +11,9 @@ type
     cbbConsultState: TComboBox;
     cbbConsultCity: TComboBox;
     lblTitulo: TLabel;
-    mmo: TMemo;
     btn1: TButton;
     function readAPI ( pathAPI : String ) : string;
+    procedure manipulateAPI ( pathAPI : String );
     procedure btn1Click(Sender: TObject);
   private
     { Private declarations }
@@ -38,18 +38,22 @@ begin
   Result := json;
 end;
 
+procedure TFormHome.manipulateAPI ( pathAPI : String );
+var
+  arrayPED : TJSONArray;
+begin
+  arrayPED := TJSONObject.ParseJSONValue( TEncoding.UTF8.GetBytes(readAPI( pathAPI )), 0 ) as TJSONArray; //ATRIBUI O JSON AO arrayPED usando o JSONOBJECT, o TENCODING CUIDA DA FORMATAÇÃO
+  showMessage ( arrayPED.Get(0).GetValue<Integer>('id').ToString ); //EXIBINDO O PRIMEIRO ELEMENTO, O INTEGER EH O VALOR RETORNADO
+end;
+
 {==============}
 
 { COMPONENTS }
 
 procedure TFormHome.btn1Click(Sender: TObject);
 begin
-  if FileExists('./API.json') then  //caso a pasta exista
-    mmo.Lines.Add(readAPI('./API.json')) //adciona nas linhas do memo
-  else
-  ShowMessage('Arquivo não encontrado'); //mensagem de erro
+  manipulateAPI('./API.json');
 end;
-
 
 {==========}
 

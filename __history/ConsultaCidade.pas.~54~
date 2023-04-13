@@ -11,8 +11,6 @@ type
     cbbConsultState: TComboBox;
     cbbConsultCity: TComboBox;
     lblTitulo: TLabel;
-    mmo: TMemo;
-    btn1: TButton;
     function readAPI ( pathAPI : String ) : string;
     procedure btn1Click(Sender: TObject);
   private
@@ -30,11 +28,11 @@ implementation
 
 { FUNCOES DIVERSAS }
 
-function TFormHome.readAPI ( pathAPI : String ) : string;
+function TFormHome.readAPI ( pathAPI : String ) : string;  { FUNCAO PARA ABRIR API E RETORNAR SEUS VALORES }
 var
   json : string;
 begin
-  json := TFile.ReadAllText( pathAPI, TEncoding.UTF8);
+  json := TFile.ReadAllText( pathAPI, TEncoding.UTF8); //atribui o conteudo do arquivo para a variavel
   Result := json;
 end;
 
@@ -44,10 +42,10 @@ end;
 
 procedure TFormHome.btn1Click(Sender: TObject);
 begin
-  if FileExists('./API.json') then
-  mmo.Lines.Add(readAPI('./API.json'))
-else
-  ShowMessage('Arquivo não encontrado');
+  if FileExists('./API.json') then  //caso a pasta exista
+    mmo.Lines.Add(readAPI('./API.json')) //adciona nas linhas do memo
+  else
+  ShowMessage('Arquivo não encontrado'); //mensagem de erro
 end;
 
 

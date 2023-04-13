@@ -11,9 +11,9 @@ type
     cbbConsultState: TComboBox;
     cbbConsultCity: TComboBox;
     lblTitulo: TLabel;
-    mmo: TMemo;
     btn1: TButton;
     function readAPI ( pathAPI : String ) : string;
+    procedure manipulateAPI ( pathAPI : String );
     procedure btn1Click(Sender: TObject);
   private
     { Private declarations }
@@ -30,14 +30,20 @@ implementation
 
 { FUNCOES DIVERSAS }
 
-function TFormHome.readAPI ( pathAPI : String ) : string;
+function TFormHome.readAPI ( pathAPI : String ) : string;  { FUNCAO PARA ABRIR API E RETORNAR SEUS VALORES }
 var
   json : string;
-  pathProject : string;
 begin
-  pathProject := ExtractFilePath(ParamStr(0));
-  json := TFile.ReadAllText( pathAPI, TEncoding.UTF8);
+  json := TFile.ReadAllText( pathAPI, TEncoding.UTF8); //atribui o conteudo do arquivo para a variavel
   Result := json;
+end;
+
+procedure TFormHome.manipulateAPI ( pathAPI : String );
+var
+  arrayPED : TJSONArray;
+begin
+  arrayPED := TJSONObject.ParseJSONValue( TEncoding.UTF8.GetBytes(readAPI( pathAPI )), 0 ) as TJSONArray; //ATRIBUI O JSON AO arrayPED usando o JSONOBJECT, o TENCODING CUIDA DA FORMATAÇÃO
+  showMessage ( arrayPED.Get(0).GetValue<Integer>('id').ToString );
 end;
 
 {==============}
@@ -46,12 +52,8 @@ end;
 
 procedure TFormHome.btn1Click(Sender: TObject);
 begin
-  if FileExists('API.json') then
-  mmo.Lines.Add(readAPI('API.json'))
-else
-  ShowMessage('Arquivo não encontrado');
+  manipulateAPI('./API.json');
 end;
-
 
 {==========}
 

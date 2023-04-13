@@ -2,7 +2,7 @@ object FormHome: TFormHome
   Left = 0
   Top = 0
   Caption = 'CONSULTAR CIDADES'
-  ClientHeight = 617
+  ClientHeight = 267
   ClientWidth = 665
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -55,20 +55,13 @@ object FormHome: TFormHome
     TabOrder = 1
     Text = 'SELECIONAR CIDADE'
   end
-  object mmo: TMemo
-    Left = 72
-    Top = 288
-    Width = 505
-    Height = 281
-    TabOrder = 2
-  end
   object btn1: TButton
-    Left = 240
-    Top = 208
-    Width = 129
+    Left = 296
+    Top = 232
+    Width = 75
     Height = 25
     Caption = 'btn1'
-    TabOrder = 3
+    TabOrder = 2
     OnClick = btn1Click
   end
 end

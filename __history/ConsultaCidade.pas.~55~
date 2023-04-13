@@ -11,10 +11,8 @@ type
     cbbConsultState: TComboBox;
     cbbConsultCity: TComboBox;
     lblTitulo: TLabel;
-    mmo: TMemo;
-    btn1: TButton;
     function readAPI ( pathAPI : String ) : string;
-    procedure btn1Click(Sender: TObject);
+    procedure TFormHome.manipulateAPI ( pathAPI : String );
   private
     { Private declarations }
   public
@@ -30,22 +28,20 @@ implementation
 
 { FUNCOES DIVERSAS }
 
-function TFormHome.readAPI ( pathAPI : String ) : string;
+function TFormHome.readAPI ( pathAPI : String ) : string;  { FUNCAO PARA ABRIR API E RETORNAR SEUS VALORES }
 var
   json : string;
 begin
-  json := TFile.ReadAllText( pathAPI, TEncoding.UTF8);
+  json := TFile.ReadAllText( pathAPI, TEncoding.UTF8); //atribui o conteudo do arquivo para a variavel
   Result := json;
 end;
+
+procedure TFormHome.manipulateAPI ( pathAPI : String );
 
 {==============}
 
 { COMPONENTS }
 
-procedure TFormHome.btn1Click(Sender: TObject);
-begin
-  mmo.Lines.Add(readAPI('.\API.json'));
-end;
 
 
 {==========}
