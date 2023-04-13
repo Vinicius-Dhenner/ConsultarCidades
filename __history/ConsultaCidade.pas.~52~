@@ -30,7 +30,7 @@ implementation
 
 { FUNCOES DIVERSAS }
 
-function TFormHome.readAPI ( pathAPI : String ) : string;
+function TFormHome.readAPI ( pathAPI : String ) : string;  { FUNCAO PARA ABRIR API E RETORNAR SEUS VALORES }
 var
   json : string;
 begin
@@ -43,9 +43,11 @@ end;
 { COMPONENTS }
 
 procedure TFormHome.btn1Click(Sender: TObject);
-var
 begin
-  mmo.Lines.Add(readAPI('.\API.json'));
+  if FileExists('./API.json') then
+    mmo.Lines.Add(readAPI('./API.json'))
+  else
+  ShowMessage('Arquivo não encontrado');
 end;
 
 

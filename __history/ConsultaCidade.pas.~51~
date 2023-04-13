@@ -43,11 +43,11 @@ end;
 { COMPONENTS }
 
 procedure TFormHome.btn1Click(Sender: TObject);
-var
-  s : string;
 begin
-  s :=
-  mmo.Lines.Add(readAPI('.\API.json'));
+  if FileExists('./API.json') then
+  mmo.Lines.Add(readAPI('./API.json'))
+else
+  ShowMessage('Arquivo não encontrado');
 end;
 
 
