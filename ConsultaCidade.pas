@@ -57,16 +57,6 @@ var
   ufObj : TJSONObject;
 begin
    json := manipulateAPI('./API.json');
-   try
-      for I := 0 to json.Size - 1 do
-      begin
-      jsonObj := json.Items[I] as TJSONObject;
-      ufObj := jsonObj.GetValue('municipio').GetValue('microrregiao').GetValue('mesorregiao').GetValue('UF') as TJSONObject;
-      cbb.Items.Insert(I, ufObj.ToString); //CONITNUAR DAQUI
-      end;
-   finally
-      json.Free;
-   end;
 
 end;
 

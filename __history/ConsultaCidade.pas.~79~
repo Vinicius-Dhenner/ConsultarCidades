@@ -14,7 +14,7 @@ type
     function readAPI ( pathAPI : String ) : string;
     function manipulateAPI ( pathAPI : String ) : TJSONArray;
     procedure cbbConsultStateChange(Sender: TObject);
-    procedure inserirCbb ( cbb : TComboBox );
+    procedure inserirCbbState ( cbb : TComboBox );
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
@@ -49,19 +49,23 @@ begin
 end;
 
 
-procedure TFormHome.inserirCbb ( cbb : TComboBox );
+procedure TFormHome.inserirCbbState ( cbb : TComboBox );
 var
   I: Integer;
   json : TJSONArray;
+  jsonObj: TJSONObject;
+  ufObj : TJSONObject;
 begin
    json := manipulateAPI('./API.json');
    try
       for I := 0 to json.Size - 1 do
       begin
-        cbb.Items.Insert(i, json.get(I).GetValue<integer>('id', 0).ToString);
+      jsonObj := json.Items[I] as TJSONObject;
+      ufObj := jsonObj.GetValue('municipio').GetValue('microrregiao').GetValue('mesorregiao').GetValue('UF') as TJSONObject;
+      cbb.Items.Insert(I, ufObj.ToString); //CONITNUAR DAQUI
       end;
    finally
-
+      json.Free;
    end;
 
 end;
@@ -72,7 +76,7 @@ end;
 
 procedure TFormHome.FormCreate(Sender: TObject);
 begin
-   inserirCbb(cbbConsultState);
+   inserirCbbState(cbbConsultState);
 end;
 
 procedure TFormHome.cbbConsultStateChange(Sender: TObject);
