@@ -11,10 +11,11 @@ type
     cbbConsultState: TComboBox;
     cbbConsultCity: TComboBox;
     lblTitulo: TLabel;
-    btn1: TButton;
     function readAPI ( pathAPI : String ) : string;
-    procedure manipulateAPI ( pathAPI : String );
-    procedure btn1Click(Sender: TObject);
+    function manipulateAPI ( pathAPI : String ) : TJSONArray;
+    procedure cbbConsultStateChange(Sender: TObject);
+    procedure inserirCbbState ( cbb : TComboBox );
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -38,21 +39,49 @@ begin
   Result := json;
 end;
 
-procedure TFormHome.manipulateAPI ( pathAPI : String );
+
+function TFormHome.manipulateAPI ( pathAPI : String ) : TJSONArray;
 var
   arrayPED : TJSONArray;
 begin
   arrayPED := TJSONObject.ParseJSONValue( TEncoding.UTF8.GetBytes(readAPI( pathAPI )), 0 ) as TJSONArray; //ATRIBUI O JSON AO arrayPED usando o JSONOBJECT, o TENCODING CUIDA DA FORMATAÇÃO
-  showMessage ( arrayPED.Get(0).GetValue<Integer>('id').ToString ); //EXIBINDO O PRIMEIRO ELEMENTO, O INTEGER EH O VALOR RETORNADO
+  result := arrayPED;
+end;
+
+
+procedure TFormHome.inserirCbbState ( cbb : TComboBox );
+var
+  I: Integer;
+  json : TJSONArray;
+  jsonObj: TJSONObject;
+  ufObj : TJSONObject;
+begin
+   json := manipulateAPI('./API.json');
+   try
+      for I := 0 to json.Size - 1 do
+      begin
+      jsonObj := json.Items[I] as TJSONObject;
+      ufObj := jsonObj.GetValue('municipio').GetValue('microrregiao').GetValue('mesorregiao').GetValue('UF') as TJSONObject;
+      cbb.Items.Insert(I, ufObj.ToString); //CONITNUAR DAQUI
+      end;
+   finally
+      json.Free;
+   end;
+
 end;
 
 {==============}
 
 { COMPONENTS }
 
-procedure TFormHome.btn1Click(Sender: TObject);
+procedure TFormHome.FormCreate(Sender: TObject);
 begin
-  manipulateAPI('./API.json');
+   inserirCbbState(cbbConsultState);
+end;
+
+procedure TFormHome.cbbConsultStateChange(Sender: TObject);
+begin
+  //
 end;
 
 {==========}

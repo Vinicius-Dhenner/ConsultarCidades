@@ -12,6 +12,7 @@ object FormHome: TFormHome
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object lblTitulo: TLabel
@@ -40,6 +41,7 @@ object FormHome: TFormHome
     ParentFont = False
     TabOrder = 0
     Text = 'SELECIONAR ESTADO'
+    OnChange = cbbConsultStateChange
   end
   object cbbConsultCity: TComboBox
     Left = 352
@@ -54,14 +56,5 @@ object FormHome: TFormHome
     ParentFont = False
     TabOrder = 1
     Text = 'SELECIONAR CIDADE'
-  end
-  object btn1: TButton
-    Left = 296
-    Top = 232
-    Width = 75
-    Height = 25
-    Caption = 'btn1'
-    TabOrder = 2
-    OnClick = btn1Click
   end
 end
